@@ -1,0 +1,225 @@
+<!---<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Speed Test</title>
+</head>
+<body>
+    <h1>Internet Speed Test</h1>
+    <p>Download Speed: <span id="downloadSpeed">0</span> Mbps</p>
+    <p>Upload Speed: <span id="uploadSpeed">0</span> Mbps</p>
+
+    <script src="speedtest.js"></script>
+</body>
+</html>--->
+
+
+
+
+
+
+<!----<!DOCTYPE html>       ------------without speed button---------
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Internet Speed Test</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2b5876;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    #downloadSpeed {
+      font-weight: bold;
+      color: #007ACC;
+    }
+
+    .loading {
+      font-size: 1rem;
+      color: #777;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Internet Speed Test</h1>
+  <p>Download Speed: <span id="downloadSpeed">Testing...</span> Mbps</p>
+  <p class="loading" id="status">Running test...</p>
+
+  <script>
+    function speedTest() {
+      const image = new Image();
+      const downloadSizeBytes = 1000000; // Approx. 1MB
+      const downloadSpeedElement = document.getElementById('downloadSpeed');
+      const status = document.getElementById('status');
+      const startTime = new Date().getTime();
+      
+      const imageUrl = "https://www.gstatic.com/webp/gallery/2.jpg?t=" + startTime;
+
+      image.onload = function () {
+        const endTime = new Date().getTime();
+        const duration = (endTime - startTime) / 1000; // in seconds
+        const bitsLoaded = downloadSizeBytes * 8;
+        const speedBps = bitsLoaded / duration;
+        const speedMbps = (speedBps / 1024 / 1024).toFixed(2);
+
+        downloadSpeedElement.textContent = speedMbps;
+        status.textContent = "Test completed.";
+      };
+
+      image.onerror = function () {
+        downloadSpeedElement.textContent = "Error";
+        status.textContent = "Could not perform the test.";
+      };
+
+      image.src = imageUrl;
+    }
+
+    window.onload = speedTest;
+  </script>
+</body>
+</html>--->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Internet Speed Test</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #32405b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-size:2.5rem ;
+      margin-bottom: 20px;
+      color: #1b4663;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    #downloadSpeed {
+      font-weight: bold;
+      color: #046aad;
+    }
+
+    .loading {
+      font-size: 1rem;
+      color: #535151;
+      margin-top: 10px;
+    }
+    .container {
+      width: 500px;
+      background-color: #ffffff;
+      padding-bottom: 15px;
+      /*position: absolute;*/
+      /*transform: translate(-50%, -50%);*/
+      /*top: 50%;
+      left: 50%;*/
+      border-radius: 0.5em;
+      /*font-family: "Poppins", sans-serif;
+      font-size: 1.2em;
+      line-height: 2.2em;*/
+      box-shadow: 0 1.6em 2.4em rgba(152, 168, 216, 0.3);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #316587;
+      color: rgb(241, 240, 240);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #4e8bb0;
+    }
+  </style>
+</head>
+<body>
+ <div class="container">
+  <h1>Internet Speed Test</h1>
+  <p>Download Speed: <span id="downloadSpeed">--</span> Mbps</p>
+  <p class="loading" id="status">Click the button to begin test.</p>
+  <button onclick="speedTest()">Test Again</button>
+ </div>
+
+ <script>
+    function speedTest() {
+      const image = new Image();
+      const downloadSizeBytes = 1000000; // Approx. 1MB
+      const downloadSpeedElement = document.getElementById('downloadSpeed');
+      const status = document.getElementById('status');
+      const startTime = new Date().getTime();
+
+      downloadSpeedElement.textContent = "--";
+      status.textContent = "Running test...";
+
+      const imageUrl = "https://www.gstatic.com/webp/gallery/2.jpg?t= " + startTime;
+
+      image.onload = function () {
+        const endTime = new Date().getTime();
+        const duration = (endTime - startTime) / 1000; // in seconds
+        const bitsLoaded = downloadSizeBytes * 8;
+        const speedBps = bitsLoaded / duration;
+        const speedMbps = (speedBps / 1024 / 1024).toFixed(2);
+        downloadSpeedElement.textContent = speedMbps;
+        status.textContent = "Test completed.";
+      };
+
+      image.onerror = function () {
+        downloadSpeedElement.textContent = "Error";
+        status.textContent = "Could not perform the test.";
+      };
+
+      image.src = imageUrl;
+    }
+
+    // Optional: Run automatically on first load
+    window.onload = speedTest;
+  </script>
+</body>
+</html>
+
+
+
+<!---         https://img.freepik.com/free-photo/old-rusty-fishing-boat-slope-along-shore-lake_181624-44902.jpg?t=-->
